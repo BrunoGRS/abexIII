@@ -1,6 +1,6 @@
 # Abex III
 
-[](Video-de-gatinho-branco-miando-meme.jpg)
+[](./Video-de-gatinho-branco-miando-meme.jpg)
 
 - **Projeto IDChild**
 
