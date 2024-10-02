@@ -2,7 +2,7 @@
 
 ### Projeto IDChild
 
-**Membros**: Bruno Rodrigues, Lucas Minetto, Nicole e Pedro
+**Membros**: Bruno Rodrigues
 
 **Descrição**
 
