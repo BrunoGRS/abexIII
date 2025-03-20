@@ -1,17 +1,16 @@
-import React from "react";
-import Logo from './components/imgs/react.png'
-import Banner from './components/imgs/banner.jpg'
+import React, { useState } from "react";
+import { Header } from "./components/Header.jsx";
+import { Body } from "./components/Body.jsx";
 
-export function App(){//ter o nome da função igual o nome do arquivo //exportar a função para se utilizar em outros arquivos
+export function App() {
+  //ter o nome da função igual o nome do arquivo //exportar a função para se utilizar em outros arquivos
 
- const canal = () =>{
-  return 'Curso de React'
- }
+  const [num, setNum] = useState(10);
 
-  return(
-  <>
-  <p>{canal()}: <img src={Logo}/></p>
-  </>
-  )
-
-};
+  return (
+    <>
+      <Header />
+      <Body />
+    </>
+  );
+}
