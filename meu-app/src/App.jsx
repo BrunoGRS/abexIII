@@ -1,16 +1,17 @@
-import React, { useState } from "react";
-import { Header } from "./components/Header.jsx";
+import React from "react";
 import { Body } from "./components/Body.jsx";
+import Listagem from "./components/Listagem.jsx";
+import { Navbar } from "./components/Navbar.jsx";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 export function App() {
-  //ter o nome da função igual o nome do arquivo //exportar a função para se utilizar em outros arquivos
-
-  const [num, setNum] = useState(10);
-
   return (
-    <>
-      <Header />
-      <Body />
-    </>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Body />} />
+        <Route path="/profissionais" element={<Listagem />} />
+      </Routes>
+    </Router>
   );
 }

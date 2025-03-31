@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Logo from "./imgs/logo.png";
 import "./css/Navbar.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Forms } from "./Forms.jsx";
+import { Link } from "react-router-dom";
 
 export function Navbar() {
   return (
@@ -17,7 +16,7 @@ export function Navbar() {
             <a>Como funciona</a>
           </li>
           <li>
-            <a href="#">Achar um profissional</a>
+            <Link to="/profissionais">Achar um profissional</Link>
           </li>
           <li>
             <a href="#">Blog</a>

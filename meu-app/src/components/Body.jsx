@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Forms } from "./Forms.jsx";
 import { Footer } from "./Footer.jsx";
-import { Navbar } from "./Navbar.jsx";
 import "./css/Body.css";
 import Profissionais from "./imgs/profissionais.jpg";
 import Terapeuta from "./imgs/terapeuta.jpg";
-import Pessoas from "./imgs/pessoasfelizes.jpg";
+import { Link } from "react-router-dom";
 
 export function Body() {
   /*useEffect(()=>{
@@ -17,13 +15,14 @@ export function Body() {
   return (
     <section>
       <style src="./css/Body.css" />
-      <Navbar />
       <section className="inicio">
         <div className="imagem-prof">
           <img className="prof" src={Profissionais}></img>
           <h2>Profissionais de Saúde Online</h2>
           <p>Ache sua solucação Agora!</p>
-          <button className="btn">Encontrar!</button>
+          <Link to="/profissionais">
+            <button className="btn">Encontrar!</button>
+          </Link>
         </div>
       </section>
       <section className="about-us">
@@ -56,7 +55,6 @@ export function Body() {
           </p>
         </div>
       </section>
-      <Forms />
       <Footer />
     </section>
   );
