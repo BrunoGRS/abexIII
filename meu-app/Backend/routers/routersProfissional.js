@@ -8,5 +8,5 @@ ProfissionalRouter.route("/create").post((req, res) =>
 );
 
 ProfissionalRouter.route("/buscar").get((req, res) =>
-  profissionalController.buscarProfissional(req, res)
+  profissionalController.buscarDadosCompletosProfissionais(req, res)
 );

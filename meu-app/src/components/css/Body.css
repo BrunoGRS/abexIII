@@ -16,14 +16,14 @@
   color: white;
   font-weight: bold;
   padding: 10px 20px;
-  text-decoration: none;
-  margin-top: 25px;
   border-radius: 5px;
-  margin-left: 700px;
-  display: inline-block;
-  margin-bottom: 30px;
   border: none;
   cursor: pointer;
+  max-width: 800px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
 }
 
 .btn:hover {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Logo from "./imgs/logo.png";
 import "./css/Navbar.css";
 import { Link } from "react-router-dom";
+import Login from "./login";
 
 export function Navbar() {
   return (
@@ -22,9 +23,10 @@ export function Navbar() {
             <a href="#">Blog</a>
           </li>
           <li>
-            <a href="#">Quem somos</a>
+            <Link to="/sou-profissional">Sou profissional</Link>
           </li>
         </ul>
+        <Login />
       </nav>
     </section>
   );

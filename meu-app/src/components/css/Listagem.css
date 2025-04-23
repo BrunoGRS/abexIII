@@ -57,6 +57,13 @@ body {
   gap: 15px;
 }
 
+.toggle-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
 /* Cartões dos profissionais */
 .card {
   background: white;
@@ -84,6 +91,24 @@ body {
   margin: 5px 0;
   font-size: 14px;
   color: #333;
+}
+
+.whatsapp-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.whatsapp-button {
+  background-color: #25d366;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
 }
 
 /* Layout responsivo */

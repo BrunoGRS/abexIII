@@ -1,0 +1,123 @@
+USE IXMed;
+GO
+
+-- Usuário
+CREATE TABLE Usuario (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    S_Nome_Usuario VARCHAR(100) NOT NULL,
+    S_Email_Usuario VARCHAR(100) NOT NULL,
+    S_Senha_Usuario VARCHAR(255) NOT NULL,
+    S_CPF_Usuario VARCHAR(14) UNIQUE NOT NULL
+);
+GO
+
+-- Profissional
+CREATE TABLE Profissional (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    S_Cod_Registro VARCHAR(50) UNIQUE NOT NULL,
+    S_Nome_Profissional VARCHAR(100) NOT NULL,
+    S_Email VARCHAR(100) NOT NULL,
+    S_Telefone VARCHAR(20)
+);
+GO
+
+-- Especialidade
+CREATE TABLE Especialidade (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    S_Descricao_Especialidade VARCHAR(100) NOT NULL
+);
+GO
+
+-- Relacionamento entre Profissional e Especialidade (N:N)
+CREATE TABLE ProfissionalXEspecialidade (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    I_Id_Profissional INT NOT NULL,
+    I_Id_Especialidade INT NOT NULL,
+    FOREIGN KEY (I_Id_Profissional) REFERENCES Profissional(Id) ON DELETE CASCADE,
+    FOREIGN KEY (I_Id_Especialidade) REFERENCES Especialidade(Id) ON DELETE CASCADE
+);
+GO
+
+-- Serviço prestado pelo profissional
+CREATE TABLE Servico (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    I_Id_Profissional INT NOT NULL,
+    F_Valor_Consulta DECIMAL(7,2),
+    S_Descricao VARCHAR(500),
+    FOREIGN KEY (I_Id_Profissional) REFERENCES Profissional(Id) ON DELETE CASCADE
+);
+GO
+
+-- Agendamento de consulta
+CREATE TABLE Agendamento (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    I_Id_Usuario INT NOT NULL,
+    I_Id_Profissional INT NOT NULL,
+    D_Data_Agenda DATE NOT NULL,
+    T_Hora_Agenda TIME NOT NULL,
+    E_Status VARCHAR(20) CHECK (E_Status IN ('Pendente', 'Confirmado', 'Cancelado','Disponível')) NOT NULL DEFAULT 'Disponível',
+    FOREIGN KEY (I_Id_Usuario) REFERENCES Usuario(Id) ON DELETE CASCADE,
+    FOREIGN KEY (I_Id_Profissional) REFERENCES Profissional(Id) ON DELETE CASCADE
+);
+GO
+
+-- Avaliação de um profissional por um usuário
+CREATE TABLE Avaliacao (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    I_Id_Usuario INT NOT NULL,
+    I_Id_Profissional INT NOT NULL,
+    F_Nota DECIMAL(2,1) CHECK (F_Nota BETWEEN 0 AND 5) NOT NULL,
+    CreateAt DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (I_Id_Usuario) REFERENCES Usuario(Id) ON DELETE CASCADE,
+    FOREIGN KEY (I_Id_Profissional) REFERENCES Profissional(Id) ON DELETE CASCADE
+);
+GO
+
+-- Faixa etária atendida pelo profissional
+CREATE TABLE FaixaEtaria (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    V_Descricao_FaixaEtaria VARCHAR(50) NOT NULL
+);
+GO
+
+-- Público atendido pelo profissional
+CREATE TABLE PublicoAtendimento (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    I_Id_Profissional INT NOT NULL,
+    I_Id_Faixa_Etaria INT NOT NULL,
+    FOREIGN KEY (I_Id_Profissional) REFERENCES Profissional(Id) ON DELETE CASCADE,
+    FOREIGN KEY (I_Id_Faixa_Etaria) REFERENCES FaixaEtaria(Id) ON DELETE CASCADE
+);
+GO
+
+-- Categoria do post no blog
+CREATE TABLE Categoria (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+   I_Descricao_Categoria VARCHAR(100) NOT NULL
+);
+GO
+
+-- Postagem no blog
+CREATE TABLE Post (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    S_Titulo VARCHAR(200) NOT NULL,
+    S_Conteudo VARCHAR(MAX) NOT NULL,
+    I_Id_Usuario INT NOT NULL,
+    DT_CreateAt DATETIME DEFAULT GETDATE(),
+    I_Id_Categoria INT NOT NULL,
+    FOREIGN KEY (I_Id_Usuario) REFERENCES Usuario(Id) ON DELETE CASCADE,
+    FOREIGN KEY (I_Id_Categoria) REFERENCES Categoria(Id) ON DELETE CASCADE
+);
+GO
+
+-- Comentários em postagens do blog
+CREATE TABLE Comentario (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    I_Id_Post INT NOT NULL,
+    V_Conteudo VARCHAR(250) NOT NULL,
+    I_Id_Usuario INT NOT NULL,
+    DT_CreateAt DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (I_Id_Post) REFERENCES Post(Id) ON DELETE CASCADE,
+    FOREIGN KEY (I_Id_Usuario) REFERENCES Usuario(Id) ON DELETE CASCADE
+);
+GO

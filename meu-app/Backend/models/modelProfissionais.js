@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize";
 import { db } from "../database/database.js";
 
 export default db.define(
-  "profissional",
+  "preprofissional",
   {
     Id: {
       type: Sequelize.INTEGER.UNSIGNED,

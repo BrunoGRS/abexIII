@@ -1,5 +1,6 @@
 import { db } from "../database/database.js";
 import modelProfissionais from "../models/modelProfissionais.js";
+import { Sequelize, DataTypes, QueryTypes } from "sequelize";
 
 async function criarProfissional(req, res) {
   try {
@@ -14,32 +15,42 @@ async function criarProfissional(req, res) {
       await modelProfissionais.sync();
     }
 
-    if (modelProfissionais.create(profissional)) {
-      res.status(201).send({ msg: "Profissional Cadastrado com sucesso!" });
+    const result = await modelProfissionais.create(profissional);
+
+    if (result) {
+      res.status(201).send({ msg: "Profissional pré cadastrado com sucesso!" });
     }
   } catch (error) {
-    console.log(req.body);
     res
-      .status(400)
+      .status(409)
       .send({ msg: `Erro ao cadastar profissional, error: ${error}` });
   }
 }
 
-async function buscarProfissional(req, res) {
+async function buscarDadosCompletosProfissionais(req, res) {
   try {
-    let profissional = modelProfissionais.findAll();
+    const informacoes = await db.query(
+      `select P.S_Cod_Registro, 
+          P.S_Nome_Profissional, 
+          P.S_Email,
+          E.S_Descricao_Especialidade
+          from profissional P
+          left join profissionalxespecialidade EP on P.Id = EP.I_Id_Profissional
+          left join especialidade E on EP.Id = E.Id`,
+      {
+        type: Sequelize.QueryTypes.SELECT,
+      }
+    );
 
-    if (profissional) {
-      profissional.then(
-        (dados) => {
-          res.status(200).send({ msg: dados });
-        },
-        (error) => {
-          onsole.error("Erro ao mostrar Profissionais", error);
-        }
-      );
+    if (informacoes) {
+      return res.status(200).json({ data: informacoes });
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-export default { criarProfissional, buscarProfissional };
+export default {
+  criarProfissional,
+  buscarDadosCompletosProfissionais,
+};

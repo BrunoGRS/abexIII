@@ -64,7 +64,7 @@ create table Medicamentosfichamedica (
 create table comordidadeFichaMedica (
 	IdComordidade int auto_increment primary key,
     IdFichaMedica int not null,
-    IdNomeComordidade varchar(50) not null,
+    IdNomeComordidade varchar(50),
     foreign key (IdFichaMedica) references fichamedica (IdFichaMedica)
 )
 

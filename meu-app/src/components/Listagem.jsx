@@ -14,8 +14,8 @@ const Listagem = () => {
         const response = await fetch(
           "http://localhost:3000/api/profissional/buscar"
         );
-        const data = await response.json();
-        const listaProfissionais = Array.isArray(data.msg) ? data.msg : [];
+        const inf = await response.json();
+        const listaProfissionais = Array.isArray(inf.data) ? inf.data : [];
         setProfissionais(listaProfissionais);
         setResultados(listaProfissionais); // Atualiza os resultados iniciais
       } catch (error) {
@@ -29,17 +29,21 @@ const Listagem = () => {
   // Função para filtrar os profissionais
   const filtrarProfissionais = () => {
     const filtrados = profissionais.filter((prof) => {
-      return (
+      const nomeCondicao =
         !filtroNome ||
         prof.S_Nome_Profissional.toLowerCase().includes(
           filtroNome.toLowerCase()
-        ) /* &&
-        (!filtroEspecialidade ||
-          prof.S_Especialidade.toLowerCase().includes(
-            filtroEspecialidade.toLowerCase()
-          ))*/
-      );
+        );
+
+      const especialidadeCondicao =
+        !filtroEspecialidade ||
+        prof.S_Descricao_Especialidade?.toLowerCase().includes(
+          filtroEspecialidade.toLowerCase() // valida se tem descrição, se não tem, não conta para o filtro
+        );
+
+      return nomeCondicao && especialidadeCondicao; // Ambos os filtros são aplicados corretamente
     });
+
     setResultados(filtrados);
   };
 
@@ -55,7 +59,7 @@ const Listagem = () => {
           />
           <input
             type="text"
-            placeholder="Buscar por especialidade"
+            placeholder="Buscar por Especialidade"
             value={filtroEspecialidade}
             onChange={(e) => setFiltroEspecialidade(e.target.value)}
           />
@@ -70,6 +74,20 @@ const Listagem = () => {
               <h3>{prof.S_Nome_Profissional}</h3>
               <p>Email: {prof.S_Email}</p>
               <p>Telefone: {prof.S_Telefone || "Não informado"}</p>
+              <p className="especialidade">
+                Especialidade:{" "}
+                {prof.S_Descricao_Especialidade || "Não Informado"}
+              </p>
+              <div className="whatsapp-container">
+                <a
+                  href="https://api.whatsapp.com/send?phone=5549998316596&text=Olá!%20Encontrei%20seu%20perfil%20na IXMed%20e%20gostaria%20de%20mais%20informações."
+                  target="_blank"
+                  rel="noreferrer"
+                  className="whatsapp-button"
+                >
+                  WhatsApp!
+                </a>
+              </div>
             </div>
           ))
         ) : (
