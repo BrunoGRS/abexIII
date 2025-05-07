@@ -14,13 +14,13 @@ export function Navbar() {
         </div>
         <ul className="nav-links">
           <li>
-            <a>Como funciona</a>
+            <Link to="/">Como Funciona</Link>
           </li>
           <li>
             <Link to="/profissionais">Achar um profissional</Link>
           </li>
           <li>
-            <a href="#">Blog</a>
+            <Link to="/Blog">Blog</Link>
           </li>
           <li>
             <Link to="/sou-profissional">Sou profissional</Link>

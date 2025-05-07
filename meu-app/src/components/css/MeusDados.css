@@ -1,0 +1,65 @@
+.container-meus-dados {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 400px; /* Ajuste conforme necessário */
+  margin: 30px auto; /* Centraliza o container na página */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  text-align: left;
+}
+
+.container-meus-dados h2 {
+  font-size: 1.8em;
+  color: #007bff;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.user-info {
+  margin-bottom: 30px;
+}
+
+.user-info img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.user-info label {
+  display: block;
+  font-weight: bold;
+  color: #777;
+  margin-bottom: 5px;
+  font-size: 0.95em;
+}
+
+.user-info p {
+  margin-bottom: 15px;
+  font-size: 1.1em;
+  color: #555;
+}
+
+.button-back {
+  padding: 8px 12px;
+  background-color: #28a745; /* Azul estilo Tailwind (blue-600) */
+  color: #fff;
+  font-weight: 200;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-back:hover {
+  background-color: #1e7e34;
+}

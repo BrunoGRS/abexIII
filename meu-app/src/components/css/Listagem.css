@@ -88,9 +88,17 @@ body {
 
 /* Informações de contato */
 .card p {
-  margin: 5px 0;
-  font-size: 14px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 1rem;
   color: #333;
+}
+
+.card strong {
+  min-width: 110px;
+  font-weight: 600;
+  color: #4a4a4a;
 }
 
 .whatsapp-container {

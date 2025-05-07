@@ -1,11 +1,13 @@
 import { React, useState, useEffect, useRef } from "react";
 import "./css/Logado.css";
+import { signOut } from "firebase/auth";
+import { auth } from "../../Backend/firebaseConfig";
 import { Link } from "react-router-dom";
-import Login from "./login";
 
 const Logado = (props) => {
   const [menuAberto, setMenuAberto] = useState(false);
   const menuRef = useRef(null);
+  const user = auth.currentUser;
 
   const toggleMenu = () => {
     setMenuAberto((prev) => !prev);
@@ -26,7 +28,14 @@ const Logado = (props) => {
   }, []);
 
   const backLogin = () => {
-    return <Logado />;
+    signOut(auth)
+      .then(() => {
+        props.setlogado(false);
+        localStorage.removeItem("user");
+      })
+      .catch((error) => {
+        console.error("Erro ao deslogar:", error);
+      });
   };
 
   return (
@@ -42,10 +51,9 @@ const Logado = (props) => {
       {menuAberto && (
         <ul className="dropdown" id="dropdownMenu">
           <li>
-            <a href="#">Meus dados</a>
-          </li>
-          <li>
-            <a href="#">Agendas</a>
+            <Link to="/meus-dados" auth={auth}>
+              Meus Dados
+            </Link>
           </li>
           <li>
             <button onClick={backLogin}>Sair</button>
