@@ -30,7 +30,8 @@ async function criarProfissional(req, res) {
 async function buscarDadosCompletosProfissionais(req, res) {
   try {
     const informacoes = await db.query(
-      `select P.S_Cod_Registro, 
+      `select P.Id, 
+          P.S_Cod_Registro, 
           P.S_Nome_Profissional, 
           P.S_Email,
           E.S_Descricao_Especialidade

@@ -34,7 +34,6 @@ export function Forms() {
         }
       );
 
-      console.log(response.status);
       if (response.status != 201) {
         toast.error(`Erro ao enviar formulário! Erro: ${error}`);
       } else {

@@ -4,23 +4,28 @@ import { Sequelize, DataTypes, QueryTypes } from "sequelize";
 
 async function validateUser(req, res) {
   try {
+    let info = [];
+
     const user = {
-      S_Nome_Usuario: body.S_Nome_Usuario,
-      S_Senha_Usuario: body.S_Senha_Usuario,
+      Id: req.body.Id,
+      S_Nome_Usuario: req.body.S_Nome_Usuario,
+      S_Email: req.body.S_Email,
     };
 
-    const info = await db.query(
-      `select S_Nome_Usuario, S_Senha_Usuario from usuario where S_Nome_Usuario = ${user.S_Nome_Usuario} and S_Senha_Usuario = ${user.S_Senha_Usuario}
-        `,
+    info = await db.query(
+      `SELECT Id, S_Nome_Usuario, S_Email FROM usuario WHERE Id = ?, S_Nome_Usuario = ? AND S_Email = ?`,
       {
+        replacements: [user.Id, user.S_Nome_Usuario, user.S_Email],
         type: Sequelize.QueryTypes.SELECT,
       }
     );
 
-    if (info) {
+    console.log(info);
+
+    if (info.length > 0) {
       res.status(200).send({ msg: true });
     } else {
-      res.status(404).send({ msg: false });
+      res.status(409).send({ msg: false });
     }
   } catch (error) {
     res.status(500).send({ msg: `Erro: ${error}` });
@@ -28,4 +33,27 @@ async function validateUser(req, res) {
   }
 }
 
-export default validateUser;
+async function criarUser(req, res) {
+  try {
+    const user = {
+      Id: req.body.Id,
+      S_Nome_Usuario: req.body.S_Nome_Usuario,
+      S_Email: req.body.S_Email,
+    };
+
+    if (!modelUsuario.sync().isPendig) {
+      await modelUsuario.sync();
+    }
+
+    const result = await modelUsuario.create(user);
+
+    if (result) {
+      res.status(201).send({ msg: "Usuário cadastrado com sucesso!" });
+    }
+  } catch (error) {
+    res.status(500).send({ msg: `Erro: ${error}` });
+    console.log(error);
+  }
+}
+
+export default { validateUser, criarUser };

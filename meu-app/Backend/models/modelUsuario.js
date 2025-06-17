@@ -14,15 +14,7 @@ export default db.define(
       type: Sequelize.STRING,
       allowNull: false,
     },
-    S_Email_Usuario: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    S_Senha_Usuario: {
-      type: Sequelize.STRING,
-      allowNull: true,
-    },
-    S_CPF_Usuario: {
+    S_Email: {
       type: Sequelize.STRING,
       allowNull: false,
     },
