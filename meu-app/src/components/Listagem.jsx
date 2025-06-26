@@ -1,6 +1,6 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./css/Listagem.css";
-import { ckb, ptBR } from "date-fns/locale";
+import { ptBR } from "date-fns/locale";
 import { format, addDays, isSameDay, isBefore, startOfDay } from "date-fns";
 import { auth } from "../../Backend/firebaseConfig";
 import { toast, ToastContainer } from "react-toastify";
@@ -23,8 +23,8 @@ const Listagem = () => {
 
   const indiceInicio = (paginaAtual - 1) * itensPorPagina;
   const indiceFim = indiceInicio + itensPorPagina;
-  const profissionaisPaginados = profissionais.slice(indiceInicio, indiceFim);
-  const totalPaginas = Math.ceil(profissionais.length / itensPorPagina);
+  const profissionaisPaginados = resultados.slice(indiceInicio, indiceFim);
+  const totalPaginas = Math.ceil(resultados.length / itensPorPagina);
 
   const generateDays = (start = startDate, numDays = visibleDaysCount) => {
     const today = startOfDay(new Date());
@@ -81,7 +81,7 @@ const Listagem = () => {
     fetchProfissionais();
   }, []);
 
-  const filtrarProfissionais = () => {
+  useEffect(() => {
     const filtrados = profissionais.filter((prof) => {
       const nomeCondicao =
         !filtroNome ||
@@ -95,8 +95,10 @@ const Listagem = () => {
         );
       return nomeCondicao && especialidadeCondicao;
     });
+
     setResultados(filtrados);
-  };
+    setPaginaAtual(1); // reseta para primeira página ao filtrar
+  }, [filtroNome, filtroEspecialidade, profissionais]);
 
   const handleSlotSelection = (profId, date, time) => {
     setSelectedSlots({
@@ -134,11 +136,11 @@ const Listagem = () => {
         }
       );
 
-      response.status != 201
-        ? toast.error(`Erro ao agendar! Erro: ${error}`)
+      response.status !== 201
+        ? toast.error(`Erro ao agendar!`)
         : toast.success("Agendamento realizado!");
     } catch (error) {
-      throw new Error(toast.error(`Erro ao agendar! Data já agendada`));
+      toast.error(`Erro ao agendar! Data já agendada`);
     }
   };
 
@@ -147,9 +149,8 @@ const Listagem = () => {
     const slot = selectedSlots[prof.id];
     const user = auth.currentUser;
 
-    if (auth.currentUser) {
+    if (user) {
       setAgendamentos([...agendamentos, { prof, ...slot }]);
-      console.log(prof.Id);
       agendarConsulta(
         prof.Id,
         user.uid,
@@ -180,7 +181,6 @@ const Listagem = () => {
             value={filtroEspecialidade}
             onChange={(e) => setFiltroEspecialidade(e.target.value)}
           />
-          <button onClick={filtrarProfissionais}>Buscar</button>
         </div>
       </div>
 
@@ -261,7 +261,6 @@ const Listagem = () => {
         </div>
       ))}
 
-      {/* Modal de confirmação */}
       {showModal && profAgendar && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -276,7 +275,7 @@ const Listagem = () => {
         </div>
       )}
 
-      {profissionais.length > itensPorPagina && (
+      {resultados.length > itensPorPagina && (
         <div className="paginacao">
           <button
             onClick={() => setPaginaAtual(paginaAtual - 1)}

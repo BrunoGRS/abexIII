@@ -1,64 +1,98 @@
 import React from "react";
 import "./css/Footer.css";
+import {
+  FaWhatsapp,
+  FaInstagram,
+  FaYoutube,
+  FaFacebookF,
+} from "react-icons/fa";
 
 export function Footer() {
   return (
-    <footer>
-      <div className="footer-container">
-        {/* Seção Sobre Nós */}
-        <div className="footer-section">
-          <h3>Sobre Nós</h3>
-          <p>
-            Conectamos você aos melhores profissionais de saúde. Atendimento
-            rápido, seguro e humanizado para você e sua família.
-          </p>
-        </div>
-
-        {/* Seção Links Úteis */}
-        <div className="footer-section">
-          <h3>Links Úteis</h3>
-          <ul>
-            <li>
-              <a href="#">Início</a>
-            </li>
-            <li>
-              <a href="#">Serviços</a>
-            </li>
-            <li>
-              <a href="#">Blog</a>
-            </li>
-            <li>
-              <a href="#">Contato</a>
-            </li>
-          </ul>
-        </div>
-
-        {/* Seção Contato */}
-        <div className="footer-section">
-          <h3>Contato</h3>
-          <p>📍 Rua Exemplo, 123 - São Paulo, SP</p>
-          <p>📞 (11) 99999-9999</p>
-          <p>✉ contato@exemplo.com</p>
-
+    <footer className="footer-novo">
+      <div className="footer-topo">
+        <div className="logo-social">
+          <div className="logo-area">
+            <span className="nome-site">IXMed, saúde ao seu alcance</span>
+          </div>
           <div className="social-icons">
-            <a href="#" aria-label="Facebook">
-              <i className="fab fa-facebook-f"></i>
+            <a href="#" className="circle whatsapp">
+              <FaWhatsapp />
             </a>
-            <a href="#" aria-label="Instagram">
-              <i className="fab fa-instagram"></i>
+            <a href="#" className="circle instagram">
+              <FaInstagram />
             </a>
-            <a href="#" aria-label="LinkedIn">
-              <i className="fab fa-linkedin-in"></i>
+            <a href="#" className="circle youtube">
+              <FaYoutube />
             </a>
+            <a href="#" className="circle facebook">
+              <FaFacebookF />
+            </a>
+          </div>
+        </div>
+
+        <div className="footer-colunas">
+          <div className="coluna">
+            <h4>Navegação</h4>
+            <ul>
+              <li>
+                <a href="/">Início</a>
+              </li>
+              <li>
+                <a href="/">Como Funciona</a>
+              </li>
+              <li>
+                <a href="/sou-profissional">Quero Começar</a>
+              </li>
+              <li>
+                <a href="/profissionais">Sou Profissional</a>
+              </li>
+              <li>
+                <a href="/">Contato</a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="coluna">
+            <h4>Contato</h4>
+            <p>(11) 99999-9999</p>
+            <p>contato@ixmed.com.br</p>
+            <p>Rua Exemplo, 123 - São Paulo, SP</p>
+          </div>
+
+          <div className="coluna">
+            <h4>Especialidades</h4>
+            <ul>
+              <li>Alergologia</li>
+              <li>Cardiologia</li>
+              <li>Pediatria</li>
+              <li>Ginecologia</li>
+              <li>
+                <a href="/profissionais">Ver mais →</a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="coluna">
+            <h4>Links Recomendados</h4>
+            <ul>
+              <li>
+                <a href="#">Ministério da Saúde</a>
+              </li>
+              <li>
+                <a href="#">ANS</a>
+              </li>
+              <li>
+                <a href="#">Código de Ética Médica</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
 
-      {/* Rodapé Inferior */}
-      <div className="footer-bottom">
+      <div className="footer-base">
         <p>
-          &copy; 2025 Todos os direitos reservados |{" "}
-          <a href="#">Política de Privacidade</a>
+          &copy; {new Date().getFullYear()} IXMed. Todos os direitos reservados.
         </p>
       </div>
     </footer>
