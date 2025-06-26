@@ -24,8 +24,4 @@ export default db.define("post", {
     timestamps: true,
     allowNull: true,
   },
-  I_Id_Categoria: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-  },
 });

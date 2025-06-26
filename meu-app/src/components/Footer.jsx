@@ -1,19 +1,21 @@
 import React from "react";
 import "./css/Footer.css";
 
-export function Footer(props) {
+export function Footer() {
   return (
     <footer>
-      <style src="./css/Footer.css" />
-      <div class="footer-container">
-        <div class="footer-section">
+      <div className="footer-container">
+        {/* Seção Sobre Nós */}
+        <div className="footer-section">
           <h3>Sobre Nós</h3>
           <p>
-            Oferecemos os melhores <br></br> serviços de saúde para<br></br>{" "}
-            você e sua família.
+            Conectamos você aos melhores profissionais de saúde. Atendimento
+            rápido, seguro e humanizado para você e sua família.
           </p>
         </div>
-        <div class="footer-section">
+
+        {/* Seção Links Úteis */}
+        <div className="footer-section">
           <h3>Links Úteis</h3>
           <ul>
             <li>
@@ -30,25 +32,30 @@ export function Footer(props) {
             </li>
           </ul>
         </div>
-        <div class="footer-section">
+
+        {/* Seção Contato */}
+        <div className="footer-section">
           <h3>Contato</h3>
-          <p>📍 Rua Exemplo, 123, São Paulo - SP</p>
+          <p>📍 Rua Exemplo, 123 - São Paulo, SP</p>
           <p>📞 (11) 99999-9999</p>
           <p>✉ contato@exemplo.com</p>
-          <div class="social-icons">
-            <a href="#">
-              <i class="fab fa-facebook"></i>
+
+          <div className="social-icons">
+            <a href="#" aria-label="Facebook">
+              <i className="fab fa-facebook-f"></i>
             </a>
-            <a href="#">
-              <i class="fab fa-instagram"></i>
+            <a href="#" aria-label="Instagram">
+              <i className="fab fa-instagram"></i>
             </a>
-            <a href="#">
-              <i class="fab fa-linkedin"></i>
+            <a href="#" aria-label="LinkedIn">
+              <i className="fab fa-linkedin-in"></i>
             </a>
           </div>
         </div>
       </div>
-      <div class="footer-bottom">
+
+      {/* Rodapé Inferior */}
+      <div className="footer-bottom">
         <p>
           &copy; 2025 Todos os direitos reservados |{" "}
           <a href="#">Política de Privacidade</a>
